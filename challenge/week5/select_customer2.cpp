@@ -27,31 +27,46 @@ int main() {
         cout << "선택: ";
         cin >> choice;
 
-        if (choice == 1) {
-            int maxAgeIndex = 0;
-            for (int i = 1; i < maxPeople; i++) {
-                if (ages[i] > ages[maxAgeIndex]) {
-                    maxAgeIndex = i;
+        switch (choice) {
+            case 1: {
+                int maxAge = ages[0];
+                for (int i = 1; i < maxPeople; i++) {
+                    if (ages[i] > maxAge) {
+                        maxAge = ages[i];
+                    }
                 }
-            }
-            cout << "나이가 가장 많은 사람: " << names[maxAgeIndex] << " (" << ages[maxAgeIndex] << "세)\n";
-        } 
-        else if (choice == 2) {
-            int minAgeIndex = 0;
-            for (int i = 1; i < maxPeople; i++) {
-                if (ages[i] < ages[minAgeIndex]) {
-                    minAgeIndex = i;
+                cout << "나이가 가장 많은 사람(들): " << endl;
+                for (int i = 0; i < maxPeople; i++) {
+                    if (ages[i] == maxAge) {
+                        cout << names[i] << " (" << ages[i] << "세)\n";
+                    }
                 }
+                break;
             }
-            cout << "나이가 가장 적은 사람: " << names[minAgeIndex] << " (" << ages[minAgeIndex] << "세)\n";
-        } 
-        else if (choice == 3) {
-            cout << "프로그램을 종료합니다." << endl;
-            running = false;
-        } 
-        else {
-            cout << "잘못된 입력입니다. 프로그램을 종료합니다." << endl;
-            running = false;
+            case 2: {
+                int minAge = ages[0];
+                for (int i = 1; i < maxPeople; i++) {
+                    if (ages[i] < minAge) {
+                        minAge = ages[i];
+                    }
+                }
+                cout << "나이가 가장 적은 사람(들): " << endl;
+                for (int i = 0; i < maxPeople; i++) {
+                    if (ages[i] == minAge) {
+                        cout << names[i] << " (" << ages[i] << "세)\n";
+                    }
+                }
+                break;
+            }
+            case 3:
+                cout << "프로그램을 종료합니다." << endl;
+                running = false;
+                break;
+
+            default:
+                cout << "잘못된 입력입니다. 프로그램을 종료합니다." << endl;
+                running = false;
+                break;
         }
     }
 
