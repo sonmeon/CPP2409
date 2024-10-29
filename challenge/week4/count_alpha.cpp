@@ -14,10 +14,9 @@ int main() {
             case 'A': case 'E': case 'I': case 'O': case 'U':
                 vowel++;
                 break;
-            default:
-                if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
+            default:{
                     consonant++;
-                }
+            }
                 break;
         }
     }
