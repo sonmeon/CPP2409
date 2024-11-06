@@ -1,6 +1,6 @@
-// main.cpp
 #include <iostream>
 #include <string>
+#include <vector>
 #include "user.h"
 using namespace std;
 
@@ -8,15 +8,15 @@ const int mapX = 5;
 const int mapY = 5;
 
 bool checkXY(int user_x, int user_y);
-void displayMap(int map[][mapX], int user_x, int user_y);
-bool checkGoal(int map[][mapX], int user_x, int user_y);
-void checkState(int map[][mapX], int user_x, int user_y, User& user);
+void displayMap(const vector<vector<int>>& map, int user_x, int user_y);
+bool checkGoal(const vector<vector<int>>& map, int user_x, int user_y);
+void checkState(vector<vector<int>>& map, int user_x, int user_y, User& user);
 void adjustPlayerPosition(int& x, int& y, const string& direction);
 void revertToPreviousPosition(int& x, int& y, const string& direction);
-bool CheckUser(User user);
+bool CheckUser(const User& user);
 
 int main() {
-    int map[mapY][mapX] = { 
+    vector<vector<int>> map = { 
         {0, 1, 2, 0, 4},
         {1, 0, 0, 5, 0},
         {0, 0, 0, 6, 0},
@@ -83,7 +83,7 @@ void revertToPreviousPosition(int& x, int& y, const string& direction) {
     else if (direction == "right") x -= 1;
 }
 
-void displayMap(int map[][mapX], int user_x, int user_y) {
+void displayMap(const vector<vector<int>>& map, int user_x, int user_y) {
     for (int i = 0; i < mapY; i++) {
         for (int j = 0; j < mapX; j++) {
             if (i == user_y && j == user_x) {
@@ -110,11 +110,11 @@ bool checkXY(int user_x, int user_y) {
     return user_x >= 0 && user_x < mapX && user_y >= 0 && user_y < mapY;
 }
 
-bool checkGoal(int map[][mapX], int user_x, int user_y) {
+bool checkGoal(const vector<vector<int>>& map, int user_x, int user_y) {
     return map[user_y][user_x] == 4;
 }
 
-void checkState(int map[][mapX], int user_x, int user_y, User& user) {
+void checkState(vector<vector<int>>& map, int user_x, int user_y, User& user) {
     switch (map[user_y][user_x]) {
     case 1:
         cout << "There is an item here." << endl;
@@ -138,6 +138,6 @@ void checkState(int map[][mapX], int user_x, int user_y, User& user) {
     }
 }
 
-bool CheckUser(User user) {
+bool CheckUser(const User& user) {
     return user.GetHP() > 0;
 }
